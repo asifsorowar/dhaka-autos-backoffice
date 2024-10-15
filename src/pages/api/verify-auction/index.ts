@@ -15,7 +15,7 @@ type ResponseData = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
     try {
-        if (req.method !== 'POST') res.status(200).json({ message: `Invalid method: ${req.method}` });
+        if (req.method !== 'POST') return res.status(200).json({ message: `Invalid method: ${req.method}` });
 
         const baseUrl = 'https://carmodsbd.com/auction-sheet-verification';
 
