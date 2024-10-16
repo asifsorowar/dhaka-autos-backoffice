@@ -17,6 +17,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     try {
         if (req.method !== 'POST') return res.status(200).json({ message: `Invalid method: ${req.method}` });
 
+        if (typeof req.body === 'string') req.body = JSON.parse(req.body);
+
+        if (!req.body?.chassisId) return res.status(200).json({ message: `Invalid request! no chassisId provided!` });
+
         const baseUrl = 'https://carmodsbd.com/auction-sheet-verification';
 
         const resp = await fetch(baseUrl + `?chassisno=${req.body?.chassisId}`);
